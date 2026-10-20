@@ -43,13 +43,16 @@ public class ArrayStack<T> implements StackInterface<T>{
         T remove = stack[size-1];
         stack[size - 1] = null;
         size--;
+        if(size < stack.length / 4 && stack.length > 4){
+            halfLength();
+        }
         return(remove);
     }
 
     @Override
     public T push(T item) {
         if (size == stack.length) {
-            stack = Arrays.copyOf(stack, stack.length * 2);
+            doubleLength();
         }
         stack[size] = item;
         size++;
@@ -75,6 +78,24 @@ public class ArrayStack<T> implements StackInterface<T>{
         }
         return -1;
         
+    }
+
+    public void doubleLength(){
+        int length = stack.length;
+        T[] newStack = (T[]) new Object[length * 2];
+        for(int i = 0; i < length; i++){
+            newLog[i] = log[i];
+        }
+        log = newLog;
+    }
+
+    public void halfLength(){
+        int length = log.length;
+        T[] newLog = (T[]) new Object[length / 2];
+        for(int i = 0; i < length / 2; i++){
+            newLog[i] = log[i];
+        }
+        log = newLog;
     }
 
     
