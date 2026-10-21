@@ -84,18 +84,18 @@ public class ArrayStack<T> implements StackInterface<T>{
         int length = stack.length;
         T[] newStack = (T[]) new Object[length * 2];
         for(int i = 0; i < length; i++){
-            newLog[i] = log[i];
+            newStack[i] = stack[i];
         }
-        log = newLog;
+        stack = newStack;
     }
 
     public void halfLength(){
-        int length = log.length;
-        T[] newLog = (T[]) new Object[length / 2];
+        int length = stack.length;
+        T[] newStack = (T[]) new Object[length / 2];
         for(int i = 0; i < length / 2; i++){
-            newLog[i] = log[i];
+            newStack[i] = stack[i];
         }
-        log = newLog;
+        stack = newStack;
     }
 
     

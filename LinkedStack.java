@@ -1,10 +1,12 @@
+import java.util.Objects;
+
 public class LinkedStack<T> implements StackInterface<T>{
      
     private LLNode<T> stack;
     private int size; 
     
     public LinkedStack(){
-        this.stack = (T[])new Object[4];
+        this.stack = null;
         size = 0;
     }
 
@@ -38,9 +40,10 @@ public class LinkedStack<T> implements StackInterface<T>{
             throw new StackUnderflowException("Stack is empty");
         }
         LLNode <T> submit = stack;
-        LLNode <T> Temp = stack.getLink();
+        LLNode <T> temp = stack.getLink();
         stack = temp;
-        return submit;
+        size--;
+        return submit.getInfo();
     }
 
     @Override
@@ -51,9 +54,8 @@ public class LinkedStack<T> implements StackInterface<T>{
             stack = temp;
         }
         else{
-            temp.setLink(stack){
-                stack = temp;
-            }
+            temp.setLink(stack);
+            stack = temp;
         }
         size++;
         return item;
@@ -76,9 +78,10 @@ public class LinkedStack<T> implements StackInterface<T>{
        
        else{
         while(temp != null){
-            if(temp.getInfo() == o){
+            if(Objects.equals(temp.getInfo(), o)){
                 return index;
             }
+            temp = temp.getLink();
             index++;
         }
        }
